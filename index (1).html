@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aaron Christopher — UX Researcher</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600&family=Work+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #f4f1eb;
+            --accent: #d4622f;
+            --text: #2c2c2c;
+            --text-light: #666;
+            --border: #e0ddd6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Work Sans', sans-serif; color: var(--text); background: var(--secondary); line-height: 1.6; overflow-x: hidden; }
+        nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(244, 241, 235, 0.95); backdrop-filter: blur(10px); z-index: 1000; border-bottom: 1px solid var(--border); animation: slideDown 0.6s ease-out; }
+        @keyframes slideDown { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Crimson Pro', serif; font-size: 1.5rem; font-weight: 600; color: var(--primary); text-decoration: none; letter-spacing: -0.5px; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.3s ease; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.3s ease; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover::after { width: 100%; }
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 8rem 3rem 4rem; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; right: -20%; width: 80%; height: 150%; background: radial-gradient(circle, rgba(212, 98, 47, 0.08) 0%, transparent 70%); animation: float 20s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 33% { transform: translate(30px, -30px) rotate(5deg); } 66% { transform: translate(-20px, 20px) rotate(-5deg); } }
+        .hero-content { max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
+        .hero-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); font-weight: 700; margin-bottom: 1.5rem; opacity: 0; animation: fadeInUp 0.8s ease-out 0.2s forwards; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .hero h1 { font-family: 'Crimson Pro', serif; font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 300; line-height: 1.1; margin-bottom: 2rem; color: var(--primary); opacity: 0; animation: fadeInUp 0.8s ease-out 0.4s forwards; }
+        .hero h1 strong { font-weight: 600; display: block; }
+        .hero-description { font-size: 1.25rem; max-width: 650px; color: var(--text-light); line-height: 1.8; margin-bottom: 3rem; opacity: 0; animation: fadeInUp 0.8s ease-out 0.6s forwards; }
+        .cta-button { display: inline-block; padding: 1.2rem 3rem; background: var(--accent); color: white; text-decoration: none; font-weight: 600; border-radius: 0; transition: all 0.4s ease; position: relative; overflow: hidden; opacity: 0; animation: fadeInUp 0.8s ease-out 0.8s forwards; }
+        .cta-button::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.2); transition: left 0.4s ease; }
+        .cta-button:hover::before { left: 100%; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212, 98, 47, 0.3); }
+        section { max-width: 1400px; margin: 0 auto; padding: 5rem 3rem; }
+        .section-header { margin-bottom: 3rem; }
+        .section-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent); font-weight: 700; margin-bottom: 1rem; }
+        .section-title { font-family: 'Crimson Pro', serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 600; color: var(--primary); margin-bottom: 1.5rem; }
+        .section-description { font-size: 1.15rem; color: var(--text-light); max-width: 700px; line-height: 1.8; }
+        .horizontal-scroll-wrapper { overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--accent) var(--border); margin-top: 2rem; padding-bottom: 1rem; }
+        .horizontal-scroll-wrapper::-webkit-scrollbar { height: 8px; }
+        .horizontal-scroll-wrapper::-webkit-scrollbar-track { background: var(--border); border-radius: 4px; }
+        .horizontal-scroll-wrapper::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+        .horizontal-scroll-wrapper::-webkit-scrollbar-thumb:hover { background: #b54f26; }
+        .case-studies-grid { display: flex; gap: 2rem; padding: 1rem 0; min-width: min-content; }
+        .case-study-card { background: white; border: 1px solid var(--border); transition: all 0.4s ease; position: relative; overflow: hidden; cursor: pointer; flex: 0 0 380px; width: 380px; }
+        .case-study-card.hero-case-study { border: 2px solid var(--accent); box-shadow: 0 4px 20px rgba(212, 98, 47, 0.15); }
+        .case-study-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); transform: scaleY(0); transition: transform 0.4s ease; transform-origin: bottom; z-index: 1; }
+        .case-study-card.hero-case-study::before { background: linear-gradient(to bottom, var(--accent), #b54f26); transform: scaleY(1); }
+        .case-study-card:hover::before { transform: scaleY(1); transform-origin: top; }
+        .case-study-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
+        .case-study-image { width: 100%; height: 280px; display: flex; align-items: center; justify-content: center; }
+        .case-study-content { padding: 2rem; }
+        .case-study-meta { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+        .case-study-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 600; }
+        .case-study-card h3 { font-family: 'Crimson Pro', serif; font-size: 1.8rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary); }
+        .case-study-card p { color: var(--text-light); line-height: 1.7; margin-bottom: 1.5rem; }
+        .case-study-link { color: var(--accent); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: gap 0.3s ease; }
+        .case-study-link:hover { gap: 1rem; }
+        .accreditations-grid { display: flex; gap: 2rem; padding: 1rem 0; min-width: min-content; }
+        .accreditation-item { background: white; padding: 2rem; border: 1px solid var(--border); position: relative; transition: all 0.3s ease; flex: 0 0 320px; width: 320px; }
+        .accreditation-item::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--accent); transform: scaleX(0); transition: transform 0.4s ease; }
+        .accreditation-item:hover::after { transform: scaleX(1); }
+        .accreditation-icon { width: 60px; height: 60px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; color: white; font-size: 1.5rem; }
+        .accreditation-item h3 { font-family: 'Crimson Pro', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--primary); }
+        .accreditation-org { color: var(--accent); font-weight: 600; margin-bottom: 1rem; }
+        .accreditation-item p { color: var(--text-light); line-height: 1.7; }
+        .recommendations-scroll { display: flex; gap: 2rem; padding: 1rem 0; min-width: min-content; }
+        .recommendation-card { background: white; padding: 2.5rem; border-left: 4px solid var(--accent); position: relative; flex: 0 0 500px; width: 500px; }
+        .quote-mark { font-family: 'Crimson Pro', serif; font-size: 6rem; color: var(--accent); opacity: 0.15; position: absolute; top: 1rem; left: 2rem; line-height: 1; }
+        .recommendation-text { font-size: 1.2rem; line-height: 1.8; color: var(--text); margin-bottom: 2rem; position: relative; z-index: 1; font-style: italic; }
+        .recommender-info { display: flex; align-items: center; gap: 1.5rem; }
+        .recommender-avatar { width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent) 0%, #b54f26 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.3rem; flex-shrink: 0; }
+        .recommender-details h4 { font-weight: 600; color: var(--primary); margin-bottom: 0.25rem; }
+        .recommender-details p { color: var(--text-light); font-size: 0.95rem; }
+        .resources-grid { display: flex; gap: 1.5rem; padding: 1rem 0; min-width: min-content; }
+        .resource-card { background: white; padding: 2rem; border: 1px solid var(--border); transition: all 0.3s ease; position: relative; flex: 0 0 300px; width: 300px; }
+        .resource-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--accent); transform: scaleX(0); transition: transform 0.4s ease; }
+        .resource-card:hover::before { transform: scaleX(1); }
+        .resource-card:hover { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); }
+        .resource-type { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); font-weight: 700; margin-bottom: 1rem; }
+        .resource-card h3 { font-family: 'Crimson Pro', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--primary); }
+        .resource-card p { color: var(--text-light); line-height: 1.7; margin-bottom: 1.5rem; }
+        .resource-link { color: var(--accent); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: gap 0.3s ease; }
+        .resource-link:hover { gap: 1rem; }
+        footer { background: var(--primary); color: white; padding: 4rem 3rem 2rem; margin-top: 6rem; }
+        .footer-content { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+        .footer-about h3 { font-family: 'Crimson Pro', serif; font-size: 1.8rem; margin-bottom: 1rem; }
+        .footer-about p { color: rgba(255, 255, 255, 0.7); line-height: 1.8; }
+        .footer-links h4 { font-weight: 600; margin-bottom: 1.5rem; color: var(--accent); }
+        .footer-links ul { list-style: none; }
+        .footer-links a { color: rgba(255, 255, 255, 0.7); text-decoration: none; display: block; margin-bottom: 0.75rem; transition: color 0.3s ease; }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { max-width: 1400px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; color: rgba(255, 255, 255, 0.5); }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+        @media (max-width: 968px) {
+            .nav-container { padding: 1.5rem 2rem; }
+            .nav-links { gap: 1.5rem; }
+            .hero { padding: 6rem 2rem 3rem; }
+            section { padding: 4rem 2rem; }
+            .case-study-card { flex: 0 0 320px; width: 320px; }
+            .accreditation-item { flex: 0 0 280px; width: 280px; }
+            .recommendation-card { flex: 0 0 400px; width: 400px; }
+            .resource-card { flex: 0 0 280px; width: 280px; }
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        @media (max-width: 640px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .case-study-card { flex: 0 0 300px; width: 300px; }
+            .recommendation-card { flex: 0 0 350px; width: 350px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Aaron Christopher</a>
+            <ul class="nav-links">
+                <li><a href="#case-studies">Case Studies</a></li>
+                <li><a href="#recommendations">Recommendations</a></li>
+                <li><a href="#accreditations">Accreditations</a></li>
+                <li><a href="#resources">Resources</a></li>
+                <li><a href="#templates">Templates</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-label">UX Researcher</div>
+            <h1>Bridging the gap between<br><strong>human needs and business growth.</strong></h1>
+            <p class="hero-description">I help organizations make informed design decisions through rigorous user research, turning complex human behaviors into actionable insights that drive product excellence.</p>
+            <a href="#case-studies" class="cta-button">View My Work</a>
+        </div>
+    </section>
+
+    <section class="video-section" style="padding: 4rem 5%; background: linear-gradient(135deg, #f4f1eb 0%, #ffffff 100%);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <div class="section-header fade-in" style="text-align: center; margin-bottom: 3rem;">
+                <h2 class="section-title">Video Introduction</h2>
+                <p class="section-description">70 second introduction to get to know me better</p>
+            </div>
+            <div class="video-container fade-in" style="max-width: 900px; margin: 0 auto; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);">
+                <video controls preload="metadata" style="width: 100%; height: auto; display: block; background: #000;">
+                    <source src="https://xaggyregeiaruaybbiyz.supabase.co/storage/v1/object/public/Video%20Test/Aaron%20Christopher.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <section id="case-studies">
+        <div class="section-header fade-in">
+            <div class="section-label">Featured Work</div>
+            <h2 class="section-title">Case Studies</h2>
+            <p class="section-description">In-depth explorations of research projects that transformed user experiences and informed strategic product decisions.</p>
+        </div>
+
+        <div class="horizontal-scroll-wrapper">
+            <div class="case-studies-grid">
+                <div class="case-study-card fade-in hero-case-study">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Featured</span>
+                            <span class="case-study-tag" style="background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 3px;">Must See</span>
+                        </div>
+                        <h3>Hero Case Studies</h3>
+                        <p>Recommended if you only have limited time. Showcasing research across Retail, Healthcare, and Banking sectors with measurable impact.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ AI</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Revenue</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Conversion</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Views</span>
+                        </div>
+                        <a href="https://docs.google.com/presentation/d/1yZ6MuoHERsxZ9OJLJMErDzqx8lAQd8ECLydjCP_OIUE/present?slide=id.g3bf7f78355f_0_0" target="_blank" class="case-study-link">View Presentation →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Food Retail</span>
+                            <span class="case-study-tag">M&S</span>
+                        </div>
+                        <h3>Marks and Spencer Christmas Food to Order</h3>
+                        <p>Quantitative data analysis to understand user pain points based on on-site analytics for users shopping for Christmas food.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↓ Exit Rate</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Attachment Sale</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Cross Shopping</span>
+                        </div>
+                        <a href="https://docs.google.com/presentation/d/1ZADeNkmcb0fYzBAenseFZRahVaxLQBHJQG5gGTqjlZI/present?slide=id.gf2c71c5b23_0_0" target="_blank" class="case-study-link">View Presentation →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Travel</span>
+                            <span class="case-study-tag">Usability</span>
+                        </div>
+                        <h3>Usability Testing Example</h3>
+                        <p>Comprehensive example of usability testing methodology demonstrating best practices in user research for travel industry applications.</p>
+                        <a href="https://drive.google.com/file/d/1uhDCalmdom8FTaaUS8JyrJk3aayNvc_x/view" target="_blank" class="case-study-link">View Document →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Retail</span>
+                            <span class="case-study-tag">Research Plan</span>
+                        </div>
+                        <h3>Selfridges Research Plan</h3>
+                        <p>Strategic research plan developed for Selfridges to guide user experience improvements and inform design decisions.</p>
+                        <a href="https://docs.google.com/presentation/d/1_Nfi7HafeYFSSG5pmi0tIXOOPRLd5WXzu8IQMUvBa2o/edit?slide=id.g10d0e263159_0_578#slide=id.g10d0e263159_0_578" target="_blank" class="case-study-link">View Presentation →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Media</span>
+                            <span class="case-study-tag">PlayStation</span>
+                        </div>
+                        <h3>PlayStation Usability Testing Test Plan</h3>
+                        <p>Research brief created as part of the PlayStation Expert Evaluation, outlining methodology and testing protocols.</p>
+                        <a href="https://docs.google.com/presentation/d/1Fmd3ic3vVCiULb2DysQtqdLUdDXr6yFm35gQm-yLRbk/present?slide=id.g110df3acc59_0_178" target="_blank" class="case-study-link">View Presentation →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Retail</span>
+                            <span class="case-study-tag">John Lewis</span>
+                        </div>
+                        <h3>Tree Sorting John Lewis Events</h3>
+                        <p>Using tree sort methodology to evaluate whether participants can successfully locate events within the John Lewis digital ecosystem.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Visits</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Event Sign-ups</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↓ Time to Complete</span>
+                        </div>
+                        <a href="https://docs.google.com/presentation/d/1XRTtC80iD9Ui9dRKg712aiPhqDq2qPh5FeLac4rfb_Q/present?slide=id.g587bb33966_0_158" target="_blank" class="case-study-link">View Presentation →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Retail</span>
+                            <span class="case-study-tag">Samsung</span>
+                        </div>
+                        <h3>Samsung Vision Digital Optimisation</h3>
+                        <p>Using quantitative data to understand user behavior on John Lewis and develop data-driven hypotheses for optimization.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Conversion</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ AOV</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Revenue</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Market Share</span>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1FwDwBgpOdZpt4aGyNz8-HL6z5wINKodu/view" target="_blank" class="case-study-link">View Document →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Retail</span>
+                            <span class="case-study-tag">Competitive Analysis</span>
+                        </div>
+                        <h3>Large Electrical Appliance Competitor Analysis</h3>
+                        <p>Review of user needs and goals when shopping for large electrical appliances and comparative analysis of key market competitors.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↓ Drop-out Rate</span>
+                        </div>
+                        <a href="https://docs.google.com/presentation/d/1G9aLV1nfRIq6PkeAG0zeArOEgsP_EmyKRKMZDWunYVU/present?slide=id.g5d8b1005aa_0_151" target="_blank" class="case-study-link">View Presentation →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Charity</span>
+                            <span class="case-study-tag">Card Sort</span>
+                        </div>
+                        <h3>British Heart Foundation Card Sort</h3>
+                        <p>Reviewing the information architecture of the BHF website to optimize content discoverability and user navigation.</p>
+                        <a href="https://docs.google.com/presentation/d/1LznZedIOvdlJ2laujFjreSvihbwnN08ZyydlrTGHHIM/present?slide=id.p" target="_blank" class="case-study-link">View Presentation →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Retail</span>
+                            <span class="case-study-tag">A/B Testing</span>
+                        </div>
+                        <h3>Product Display Page Iteration</h3>
+                        <p>Redesign and testing of a new product display page versus the original to measure engagement and conversion improvements.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Conversion</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Product Engagement</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Get to Product Rate</span>
+                        </div>
+                        <a href="https://docs.google.com/presentation/d/1qVTUkd5CZjdGqsO874gP2xD7QCVHC0n-GqNVf0FhC5M/present?slide=id.p" target="_blank" class="case-study-link">View Presentation →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Workshop</span>
+                            <span class="case-study-tag">Education</span>
+                        </div>
+                        <h3>General Assembly Workshop/Conference</h3>
+                        <p>Remote conference exploring UX research methods in more detail, sharing best practices and advanced techniques.</p>
+                        <a href="https://docs.google.com/presentation/d/1n2yXSDjp5aW495MOsTkSmLcRuaLXQ3GHEXHJXxW56Uc/present?slide=id.p" target="_blank" class="case-study-link">View Presentation →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Media</span>
+                            <span class="case-study-tag">Netflix</span>
+                        </div>
+                        <h3>Netflix User Journey</h3>
+                        <p>Understanding the user journey for users on the Netflix streaming platform, mapping touchpoints and identifying optimization opportunities.</p>
+                        <a href="https://docs.google.com/presentation/d/1NbNLU0IuoWjVQdxTUhgpQv1-zXmywn0DuISK4J0DxhY/present?slide=id.p" target="_blank" class="case-study-link">View Presentation →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Retail</span>
+                            <span class="case-study-tag">Samsung</span>
+                        </div>
+                        <h3>Samsung TVs User Journey</h3>
+                        <p>Research to help understand how people buy Samsung TVs to enhance the digital experience and purchasing journey.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Conversion</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ AOV</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Revenue</span>
+                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Market Share</span>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1SwntHMpmxkQig3AohrpPf5RkCizexd4d/view" target="_blank" class="case-study-link">View Document →</a>
+                    </div>
+                </div>
+
+                <div class="case-study-card fade-in">
+                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop') center/cover;"></div>
+                    <div class="case-study-content">
+                        <div class="case-study-meta">
+                            <span class="case-study-tag">Retail</span>
+                            <span class="case-study-tag">Course Project</span>
+                        </div>
+                        <h3>Tomorrow Shopping Cart</h3>
+                        <p>Case study created when enrolled in 'The Ultimate Guide to Usability' course, demonstrating foundational usability principles.</p>
+                        <a href="https://docs.google.com/presentation/d/1PjRBloG5UXJ737Vx4oD0lq43ekqTk5102hchy3glIEI/present?slide=id.p" target="_blank" class="case-study-link">View Presentation →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="recommendations">
+        <div class="section-header fade-in">
+            <div class="section-label">Testimonials</div>
+            <h2 class="section-title">Recommendations</h2>
+            <p class="section-description">What colleagues and collaborators have to say about working together on user research and design projects.</p>
+        </div>
+        <div class="horizontal-scroll-wrapper">
+            <div class="recommendations-scroll">
+                <div class="recommendation-card fade-in" style="background: linear-gradient(135deg, var(--accent) 0%, #b54f26 100%); color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; cursor: pointer;" onclick="window.open('https://www.linkedin.com/in/aaronechristopher/details/recommendations/?detailScreenTabIndex=0', '_blank')">
+                    <div style="font-size: 4rem; margin-bottom: 1rem;">💼</div>
+                    <h3 style="font-family: 'Crimson Pro', serif; font-size: 2rem; margin-bottom: 0.5rem; color: white;">View All Recommendations</h3>
+                    <p style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">17 Total</p>
+                    <span style="display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; font-size: 1.1rem;">See on LinkedIn →</span>
+                </div>
+                <div class="recommendation-card fade-in">
+                    <div class="quote-mark">"</div>
+                    <p class="recommendation-text">I had the pleasure of working with Aaron as part of JP Morgan's Ops User Research team, and his impact was both immediate and lasting. From the moment he joined, Aaron brought a fresh perspective and challenged us to think more critically about how we measure success within our projects.</p>
+                    <div class="recommender-info">
+                        <div class="recommender-avatar">AM</div>
+                        <div class="recommender-details">
+                            <h4>Amber Martin</h4>
+                            <p>User Research Senior Associate at J.P. Morgan Chase & Co.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="recommendation-card fade-in">
+                    <div class="quote-mark">"</div>
+                    <p class="recommendation-text">Having Aaron join the team at Channel 4 was transformative for UXR. He brought confidence, energy, optimism, commercial acumen and a huge amount of learned UXR knowledge. The application of this knowledge is what stands Aaron apart.</p>
+                    <div class="recommender-info">
+                        <div class="recommender-avatar">DT</div>
+                        <div class="recommender-details">
+                            <h4>Diarmid Thackery</h4>
+                            <p>Mixed Methods Consumer Insights (Manager at Channel 4)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="recommendation-card fade-in">
+                    <div class="quote-mark">"</div>
+                    <p class="recommendation-text">Aaron is a brilliant UX Researcher. He has an unquenchable thirst for knowledge of his discipline, is always positive and is tireless with his thorough and meaningful output. He isn't afraid to speak up in meetings and counter the herd narrative in a calm, collected and thoughtful way.</p>
+                    <div class="recommender-info">
+                        <div class="recommender-avatar">MD</div>
+                        <div class="recommender-details">
+                            <h4>Maximilian Dunne</h4>
+                            <p>Global Head of Design (Manager at Holland & Barrett)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="recommendation-card fade-in">
+                    <div class="quote-mark">"</div>
+                    <p class="recommendation-text">I had the pleasure of working with Aaron during his year on our team at JP Morgan, where he made a significant impact as a UX Researcher. Aaron's deep knowledge of metrics, frameworks, and research methods truly helped our team demonstrate the value and impact of our work.</p>
+                    <div class="recommender-info">
+                        <div class="recommender-avatar">AW</div>
+                        <div class="recommender-details">
+                            <h4>Alexander Wood</h4>
+                            <p>Payments Product Manager at JPMorgan Chase</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="recommendation-card fade-in">
+                    <div class="quote-mark">"</div>
+                    <p class="recommendation-text">Aaron is a brilliant researcher and a gem as a teammate. Aaron runs full-cycle research using different methods, supporting all stages of product development from discovery to delivery, and then helps to implement the discoveries, participating in workshops, and convincing stakeholders with the data.</p>
+                    <div class="recommender-info">
+                        <div class="recommender-avatar">NM</div>
+                        <div class="recommender-details">
+                            <h4>Nastia Minasova</h4>
+                            <p>Lead Designer at Holland & Barrett</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="recommendation-card fade-in">
+                    <div class="quote-mark">"</div>
+                    <p class="recommendation-text">Aaron brings a wealth of expertise in user research best practice. His commitment to optimising experiences for users, coupled with his genuine passion for inclusive design and accessibility has proven to be transformative in supporting our pursuit to embed inclusivity.</p>
+                    <div class="recommender-info">
+                        <div class="recommender-avatar">LT</div>
+                        <div class="recommender-details">
+                            <h4>Louise Thompson</h4>
+                            <p>Product Manager - Accessibility at Channel 4</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="recommendation-card fade-in">
+                    <div class="quote-mark">"</div>
+                    <p class="recommendation-text">Aaron made an immediate impact in the team at C4 and quickly became a trusted collaborator with the UX & Product team. As a researcher I have found him to be incredibly knowledgeable in finding the right approach to help get the insights the team need.</p>
+                    <div class="recommender-info">
+                        <div class="recommender-avatar">AB</div>
+                        <div class="recommender-details">
+                            <h4>Andy Brockie-Dunlop</h4>
+                            <p>Director of UX & Research | Coach at Channel 4</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="recommendation-card fade-in">
+                    <div class="quote-mark">"</div>
+                    <p class="recommendation-text">Highly knowledgeable in UX Research and User Testing, Aaron is a walking encyclopedia of research models and methods and how best to apply them, to achieve results that are full of insights. Aaron's passion for research is infectious!</p>
+                    <div class="recommender-info">
+                        <div class="recommender-avatar">RM</div>
+                        <div class="recommender-details">
+                            <h4>Rajni Mattiussi</h4>
+                            <p>UX Designer at Holland & Barrett</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="accreditations">
+        <div class="section-header fade-in">
+            <div class="section-label">Credentials</div>
+            <h2 class="section-title">Accreditations</h2>
+            <p class="section-description">Professional certifications and credentials that demonstrate my commitment to excellence in user research and experience design.</p>
+        </div>
+        <div class="horizontal-scroll-wrapper">
+            <div class="accreditations-grid">
+                <div class="accreditation-item fade-in">
+                    <div class="accreditation-icon">🎓</div>
+                    <h3>Professional Diploma in UX Design</h3>
+                    <div class="accreditation-org">UX Design Institute</div>
+                    <p>Comprehensive professional qualification in user experience design, covering research methodologies, interaction design, and UX strategy.</p>
+                    <a href="https://www.credential.net/2d001748-c3ae-4b0f-b86d-530bee0210ca#acc.qkxMVI0L" target="_blank" class="case-study-link" style="margin-top: 1rem; display: inline-flex;">View Certification →</a>
+                </div>
+                <div class="accreditation-item fade-in">
+                    <div class="accreditation-icon">🤖</div>
+                    <h3>Ethical AI: AI Essentials for Everyone</h3>
+                    <div class="accreditation-org">Coursera</div>
+                    <p>Foundation in ethical AI principles, understanding AI capabilities, limitations, and responsible implementation in product development.</p>
+                    <a href="https://www.coursera.org/account/accomplishments/verify/B8YDN9HZ4P5I" target="_blank" class="case-study-link" style="margin-top: 1rem; display: inline-flex;">View Certification →</a>
+                </div>
+                <div class="accreditation-item fade-in">
+                    <div class="accreditation-icon">🧠</div>
+                    <h3>Agentic AI and AI Agents: A Primer for Leaders</h3>
+                    <div class="accreditation-org">Coursera</div>
+                    <p>Strategic understanding of agentic AI systems and autonomous agents, focusing on leadership considerations and implementation strategies.</p>
+                    <a href="https://www.coursera.org/account/accomplishments/verify/4HLG35TUP0CZ" target="_blank" class="case-study-link" style="margin-top: 1rem; display: inline-flex;">View Certification →</a>
+                </div>
+                <div class="accreditation-item fade-in">
+                    <div class="accreditation-icon">🔬</div>
+                    <h3>Introduction to AI</h3>
+                    <div class="accreditation-org">Coursera</div>
+                    <p>Foundational knowledge of artificial intelligence concepts, machine learning fundamentals, and practical AI applications.</p>
+                    <a href="https://www.coursera.org/account/accomplishments/verify/OZJY7UQ0TWIZ" target="_blank" class="case-study-link" style="margin-top: 1rem; display: inline-flex;">View Certification →</a>
+                </div>
+                <div class="accreditation-item fade-in">
+                    <div class="accreditation-icon">📊</div>
+                    <h3>Contentsquare Certified</h3>
+                    <div class="accreditation-org">Contentsquare</div>
+                    <p>Certified in Contentsquare analytics platform for understanding digital experience through behavioral analytics and AI-powered insights.</p>
+                    <a href="https://verify.skilljar.com/c/78a34vu5is8i" target="_blank" class="case-study-link" style="margin-top: 1rem; display: inline-flex;">View Certification →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="resources">
+        <div class="section-header fade-in">
+            <div class="section-label">Knowledge Hub</div>
+            <h2 class="section-title">Useful Resources</h2>
+            <p class="section-description">Curated tools, templates, and readings that I've found invaluable in conducting effective user research and sharing insights.</p>
+        </div>
+        <div class="horizontal-scroll-wrapper">
+            <div class="resources-grid">
+                <div class="resource-card fade-in">
+                    <div class="resource-type">Template</div>
+                    <h3>Research Plan Template</h3>
+                    <p>A comprehensive template for structuring your research objectives, methodology, timeline, and success metrics.</p>
+                    <a href="#" class="resource-link">Download Template →</a>
+                </div>
+                <div class="resource-card fade-in">
+                    <div class="resource-type">Guide</div>
+                    <h3>Interview Script Builder</h3>
+                    <p>Step-by-step framework for creating effective interview questions that elicit meaningful user insights.</p>
+                    <a href="#" class="resource-link">View Guide →</a>
+                </div>
+                <div class="resource-card fade-in">
+                    <div class="resource-type">Article</div>
+                    <h3>Synthesis Best Practices</h3>
+                    <p>Techniques for analyzing qualitative data and transforming raw research findings into actionable design recommendations.</p>
+                    <a href="#" class="resource-link">Read Article →</a>
+                </div>
+                <div class="resource-card fade-in">
+                    <div class="resource-type">Tool</div>
+                    <h3>Affinity Mapping Kit</h3>
+                    <p>Digital and printable templates for organizing research insights through collaborative affinity mapping sessions.</p>
+                    <a href="#" class="resource-link">Access Tool →</a>
+                </div>
+                <div class="resource-card fade-in">
+                    <div class="resource-type">Checklist</div>
+                    <h3>Usability Test Preparation</h3>
+                    <p>Complete checklist ensuring you're fully prepared for moderated and unmoderated usability testing sessions.</p>
+                    <a href="#" class="resource-link">Get Checklist →</a>
+                </div>
+                <div class="resource-card fade-in">
+                    <div class="resource-type">Reading List</div>
+                    <h3>Essential UX Research Books</h3>
+                    <p>Curated collection of must-read books covering research methods, psychology, and human-centered design principles.</p>
+                    <a href="#" class="resource-link">View List →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="templates">
+        <div class="section-header fade-in">
+            <div class="section-label">Research Tools</div>
+            <h2 class="section-title">Templates</h2>
+            <p class="section-description">Ready-to-use templates to streamline your research process, from planning through to execution.</p>
+        </div>
+        <div class="horizontal-scroll-wrapper">
+            <div class="resources-grid">
+                <div class="resource-card fade-in">
+                    <div class="resource-type">Template</div>
+                    <h3>UX Research Brief Template</h3>
+                    <p>Comprehensive template for structuring research objectives, scope, methodology, timeline, and success criteria for any UX research project.</p>
+                    <a href="https://miro.medium.com/v2/resize:fit:1400/1*7haaRmdYBupYElf-4eefnQ.png" target="_blank" class="resource-link">View Template →</a>
+                </div>
+                <div class="resource-card fade-in">
+                    <div class="resource-type">Template</div>
+                    <h3>Discussion Guide Template</h3>
+                    <p>Structured framework for conducting user interviews and moderated testing sessions with scripted prompts and follow-up questions.</p>
+                    <a href="https://7fe0a612-acc0-4078-912d-711a29897edc.filesusr.com/ugd/be941c_8c5014e037d94fbf8e2a81bf38fef476.pdf" target="_blank" class="resource-link">Download Template →</a>
+                </div>
+                <div class="resource-card fade-in">
+                    <div class="resource-type">Template</div>
+                    <h3>Pre-Test Template</h3>
+                    <p>Essential checklist to ensure all logistics, materials, and protocols are prepared before conducting usability testing sessions.</p>
+                    <a href="https://7fe0a612-acc0-4078-912d-711a29897edc.filesusr.com/ugd/be941c_0c986276f577439d88065cd7e54e0724.pdf" target="_blank" class="resource-link">Download Template →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>Aaron Christopher</h3>
+                <p>UX Researcher dedicated to uncovering deep user insights and transforming them into meaningful design solutions. Let's collaborate on your next project.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Connect</h4>
+                <ul>
+                    <li><a href="mailto:aaronechristopher92@gmail.com" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink: 0;">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        Email
+                    </a></li>
+                    <li><a href="https://www.linkedin.com/in/aaronechristopher/" target="_blank" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink: 0;">
+                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                        </svg>
+                        LinkedIn
+                    </a></li>
+                    <li><a href="https://aaronechristopher92.medium.com/" target="_blank" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink: 0;">
+                            <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+                        </svg>
+                        Medium
+                    </a></li>
+                    <li><a href="https://www.instagram.com/uxthoughts/?hl=en" target="_blank" style="display: flex; align-items: center; gap: 0.5rem;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink: 0;">
+                            <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+                        </svg>
+                        Instagram
+                    </a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Navigate</h4>
+                <ul>
+                    <li><a href="#case-studies">Case Studies</a></li>
+                    <li><a href="#recommendations">Recommendations</a></li>
+                    <li><a href="#accreditations">Accreditations</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#templates">Templates</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Aaron Christopher. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>
