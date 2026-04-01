@@ -73,18 +73,18 @@
         .horizontal-scroll-wrapper::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
         .horizontal-scroll-wrapper::-webkit-scrollbar-thumb:hover { background: #b54f26; }
         .case-studies-grid { display: flex; gap: 2rem; padding: 1rem 0; min-width: min-content; }
-        .case-study-card { background: white; border: 1px solid var(--border); transition: all 0.4s ease; position: relative; overflow: hidden; cursor: pointer; flex: 0 0 380px; width: 380px; }
+        .case-study-card { background: white; border: 1px solid var(--border); transition: all 0.4s ease; position: relative; overflow: hidden; cursor: pointer; flex: 0 0 380px; width: 380px; height: 620px; display: flex; flex-direction: column; }
         .case-study-card.hero-case-study { border: 2px solid var(--accent); box-shadow: 0 4px 20px rgba(212, 98, 47, 0.15); }
         .case-study-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); transform: scaleY(0); transition: transform 0.4s ease; transform-origin: bottom; z-index: 1; }
         .case-study-card.hero-case-study::before { background: linear-gradient(to bottom, var(--accent), #b54f26); transform: scaleY(1); }
         .case-study-card:hover::before { transform: scaleY(1); transform-origin: top; }
         .case-study-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
         .case-study-image { width: 100%; height: 280px; display: flex; align-items: center; justify-content: center; }
-        .case-study-content { padding: 2rem; }
+        .case-study-content { padding: 2rem; flex: 1; display: flex; flex-direction: column; }
         .case-study-meta { display: flex; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
         .case-study-tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); font-weight: 600; }
         .case-study-card h3 { font-family: 'Crimson Pro', serif; font-size: 1.8rem; font-weight: 600; margin-bottom: 1rem; color: var(--primary); }
-        .case-study-card p { color: var(--text-light); line-height: 1.7; margin-bottom: 1.5rem; }
+        .case-study-card p { color: var(--text-light); line-height: 1.7; margin-bottom: 1.5rem; flex: 1; }
         .case-study-link { color: var(--accent); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: gap 0.3s ease; }
         .case-study-link:hover { gap: 1rem; }
         .accreditations-grid { display: flex; gap: 2rem; padding: 1rem 0; min-width: min-content; }
@@ -157,7 +157,7 @@
             </ul>
         </div>
     </nav>
-
+ 
    <section class="hero">
     <div class="hero-content">
         <div class="hero-label">
@@ -168,7 +168,7 @@
         <a href="#case-studies" class="cta-button">View My Work</a>
     </div>
 </section>
-
+ 
     <section class="video-section" style="padding: 4rem 5%; background: linear-gradient(135deg, #f4f1eb 0%, #ffffff 100%);">
         <div style="max-width: 1200px; margin: 0 auto;">
             <div class="section-header fade-in" style="text-align: center; margin-bottom: 3rem;">
@@ -183,237 +183,265 @@
             </div>
         </div>
     </section>
-
+ 
     <section id="case-studies">
         <div class="section-header fade-in">
             <div class="section-label">Featured Work</div>
             <h2 class="section-title">Case Studies</h2>
             <p class="section-description">In-depth explorations of research projects that transformed user experiences and informed strategic product decisions.</p>
         </div>
-
+ 
         <div class="horizontal-scroll-wrapper">
             <div class="case-studies-grid">
-                <div class="case-study-card fade-in hero-case-study">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Featured</span>
-                            <span class="case-study-tag" style="background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 3px;">Must See</span>
+                <a href="https://docs.google.com/presentation/d/1yZ6MuoHERsxZ9OJLJMErDzqx8lAQd8ECLydjCP_OIUE/present?slide=id.g3bf7f78355f_0_0" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in hero-case-study">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Featured</span>
+                                <span class="case-study-tag" style="background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 3px;">Must See</span>
+                            </div>
+                            <h3>Hero Case Studies</h3>
+                            <p>Recommended if you only have limited time. Showcasing research across Retail, Healthcare, and Banking sectors with measurable impact.</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ AI</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Revenue</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Conversion</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Views</span>
+                            </div>
+                            <span class="case-study-link">View Presentation →</span>
                         </div>
-                        <h3>Hero Case Studies</h3>
-                        <p>Recommended if you only have limited time. Showcasing research across Retail, Healthcare, and Banking sectors with measurable impact.</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ AI</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Revenue</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Conversion</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Views</span>
-                        </div>
-                        <a href="https://docs.google.com/presentation/d/1yZ6MuoHERsxZ9OJLJMErDzqx8lAQd8ECLydjCP_OIUE/present?slide=id.g3bf7f78355f_0_0" target="_blank" class="case-study-link">View Presentation →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Food Retail</span>
-                            <span class="case-study-tag">M&S</span>
+                </a>
+ 
+                <a href="https://docs.google.com/presentation/d/1ZADeNkmcb0fYzBAenseFZRahVaxLQBHJQG5gGTqjlZI/present?slide=id.gf2c71c5b23_0_0" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Food Retail</span>
+                                <span class="case-study-tag">M&S</span>
+                            </div>
+                            <h3>Marks and Spencer Christmas Food to Order</h3>
+                            <p>Quantitative data analysis to understand user pain points based on on-site analytics for users shopping for Christmas food.</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↓ Exit Rate</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Attachment Sale</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Cross Shopping</span>
+                            </div>
+                            <span class="case-study-link">View Presentation →</span>
                         </div>
-                        <h3>Marks and Spencer Christmas Food to Order</h3>
-                        <p>Quantitative data analysis to understand user pain points based on on-site analytics for users shopping for Christmas food.</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↓ Exit Rate</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Attachment Sale</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Cross Shopping</span>
-                        </div>
-                        <a href="https://docs.google.com/presentation/d/1ZADeNkmcb0fYzBAenseFZRahVaxLQBHJQG5gGTqjlZI/present?slide=id.gf2c71c5b23_0_0" target="_blank" class="case-study-link">View Presentation →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Travel</span>
-                            <span class="case-study-tag">Usability</span>
+                </a>
+ 
+                <a href="https://drive.google.com/file/d/1uhDCalmdom8FTaaUS8JyrJk3aayNvc_x/view" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Travel</span>
+                                <span class="case-study-tag">Usability</span>
+                            </div>
+                            <h3>Usability Testing Example</h3>
+                            <p>Comprehensive example of usability testing methodology demonstrating best practices in user research for travel industry applications.</p>
+                            <span class="case-study-link">View Document →</span>
                         </div>
-                        <h3>Usability Testing Example</h3>
-                        <p>Comprehensive example of usability testing methodology demonstrating best practices in user research for travel industry applications.</p>
-                        <a href="https://drive.google.com/file/d/1uhDCalmdom8FTaaUS8JyrJk3aayNvc_x/view" target="_blank" class="case-study-link">View Document →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Retail</span>
-                            <span class="case-study-tag">Research Plan</span>
+                </a>
+ 
+                <a href="https://docs.google.com/presentation/d/1_Nfi7HafeYFSSG5pmi0tIXOOPRLd5WXzu8IQMUvBa2o/edit?slide=id.g10d0e263159_0_578#slide=id.g10d0e263159_0_578" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Retail</span>
+                                <span class="case-study-tag">Research Plan</span>
+                            </div>
+                            <h3>Selfridges Research Plan</h3>
+                            <p>Strategic research plan developed for Selfridges to guide user experience improvements and inform design decisions.</p>
+                            <span class="case-study-link">View Presentation →</span>
                         </div>
-                        <h3>Selfridges Research Plan</h3>
-                        <p>Strategic research plan developed for Selfridges to guide user experience improvements and inform design decisions.</p>
-                        <a href="https://docs.google.com/presentation/d/1_Nfi7HafeYFSSG5pmi0tIXOOPRLd5WXzu8IQMUvBa2o/edit?slide=id.g10d0e263159_0_578#slide=id.g10d0e263159_0_578" target="_blank" class="case-study-link">View Presentation →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Media</span>
-                            <span class="case-study-tag">PlayStation</span>
+                </a>
+ 
+                <a href="https://docs.google.com/presentation/d/1Fmd3ic3vVCiULb2DysQtqdLUdDXr6yFm35gQm-yLRbk/present?slide=id.g110df3acc59_0_178" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Media</span>
+                                <span class="case-study-tag">PlayStation</span>
+                            </div>
+                            <h3>PlayStation Usability Testing Test Plan</h3>
+                            <p>Research brief created as part of the PlayStation Expert Evaluation, outlining methodology and testing protocols.</p>
+                            <span class="case-study-link">View Presentation →</span>
                         </div>
-                        <h3>PlayStation Usability Testing Test Plan</h3>
-                        <p>Research brief created as part of the PlayStation Expert Evaluation, outlining methodology and testing protocols.</p>
-                        <a href="https://docs.google.com/presentation/d/1Fmd3ic3vVCiULb2DysQtqdLUdDXr6yFm35gQm-yLRbk/present?slide=id.g110df3acc59_0_178" target="_blank" class="case-study-link">View Presentation →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Retail</span>
-                            <span class="case-study-tag">John Lewis</span>
+                </a>
+ 
+                <a href="https://docs.google.com/presentation/d/1XRTtC80iD9Ui9dRKg712aiPhqDq2qPh5FeLac4rfb_Q/present?slide=id.g587bb33966_0_158" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Retail</span>
+                                <span class="case-study-tag">John Lewis</span>
+                            </div>
+                            <h3>Tree Sorting John Lewis Events</h3>
+                            <p>Using tree sort methodology to evaluate whether participants can successfully locate events within the John Lewis digital ecosystem.</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Visits</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Event Sign-ups</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↓ Time to Complete</span>
+                            </div>
+                            <span class="case-study-link">View Presentation →</span>
                         </div>
-                        <h3>Tree Sorting John Lewis Events</h3>
-                        <p>Using tree sort methodology to evaluate whether participants can successfully locate events within the John Lewis digital ecosystem.</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Visits</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Event Sign-ups</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↓ Time to Complete</span>
-                        </div>
-                        <a href="https://docs.google.com/presentation/d/1XRTtC80iD9Ui9dRKg712aiPhqDq2qPh5FeLac4rfb_Q/present?slide=id.g587bb33966_0_158" target="_blank" class="case-study-link">View Presentation →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Retail</span>
-                            <span class="case-study-tag">Samsung</span>
+                </a>
+ 
+                <a href="https://drive.google.com/file/d/1FwDwBgpOdZpt4aGyNz8-HL6z5wINKodu/view" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Retail</span>
+                                <span class="case-study-tag">Samsung</span>
+                            </div>
+                            <h3>Samsung Vision Digital Optimisation</h3>
+                            <p>Using quantitative data to understand user behavior on John Lewis and develop data-driven hypotheses for optimization.</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Conversion</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ AOV</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Revenue</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Market Share</span>
+                            </div>
+                            <span class="case-study-link">View Document →</span>
                         </div>
-                        <h3>Samsung Vision Digital Optimisation</h3>
-                        <p>Using quantitative data to understand user behavior on John Lewis and develop data-driven hypotheses for optimization.</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Conversion</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ AOV</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Revenue</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Market Share</span>
-                        </div>
-                        <a href="https://drive.google.com/file/d/1FwDwBgpOdZpt4aGyNz8-HL6z5wINKodu/view" target="_blank" class="case-study-link">View Document →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Retail</span>
-                            <span class="case-study-tag">Competitive Analysis</span>
+                </a>
+ 
+                <a href="https://docs.google.com/presentation/d/1G9aLV1nfRIq6PkeAG0zeArOEgsP_EmyKRKMZDWunYVU/present?slide=id.g5d8b1005aa_0_151" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Retail</span>
+                                <span class="case-study-tag">Competitive Analysis</span>
+                            </div>
+                            <h3>Large Electrical Appliance Competitor Analysis</h3>
+                            <p>Review of user needs and goals when shopping for large electrical appliances and comparative analysis of key market competitors.</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↓ Drop-out Rate</span>
+                            </div>
+                            <span class="case-study-link">View Presentation →</span>
                         </div>
-                        <h3>Large Electrical Appliance Competitor Analysis</h3>
-                        <p>Review of user needs and goals when shopping for large electrical appliances and comparative analysis of key market competitors.</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↓ Drop-out Rate</span>
-                        </div>
-                        <a href="https://docs.google.com/presentation/d/1G9aLV1nfRIq6PkeAG0zeArOEgsP_EmyKRKMZDWunYVU/present?slide=id.g5d8b1005aa_0_151" target="_blank" class="case-study-link">View Presentation →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Charity</span>
-                            <span class="case-study-tag">Card Sort</span>
+                </a>
+ 
+                <a href="https://docs.google.com/presentation/d/1LznZedIOvdlJ2laujFjreSvihbwnN08ZyydlrTGHHIM/present?slide=id.p" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Charity</span>
+                                <span class="case-study-tag">Card Sort</span>
+                            </div>
+                            <h3>British Heart Foundation Card Sort</h3>
+                            <p>Reviewing the information architecture of the BHF website to optimize content discoverability and user navigation.</p>
+                            <span class="case-study-link">View Presentation →</span>
                         </div>
-                        <h3>British Heart Foundation Card Sort</h3>
-                        <p>Reviewing the information architecture of the BHF website to optimize content discoverability and user navigation.</p>
-                        <a href="https://docs.google.com/presentation/d/1LznZedIOvdlJ2laujFjreSvihbwnN08ZyydlrTGHHIM/present?slide=id.p" target="_blank" class="case-study-link">View Presentation →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Retail</span>
-                            <span class="case-study-tag">A/B Testing</span>
+                </a>
+ 
+                <a href="https://docs.google.com/presentation/d/1qVTUkd5CZjdGqsO874gP2xD7QCVHC0n-GqNVf0FhC5M/present?slide=id.p" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Retail</span>
+                                <span class="case-study-tag">A/B Testing</span>
+                            </div>
+                            <h3>Product Display Page Iteration</h3>
+                            <p>Redesign and testing of a new product display page versus the original to measure engagement and conversion improvements.</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Conversion</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Product Engagement</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Get to Product Rate</span>
+                            </div>
+                            <span class="case-study-link">View Presentation →</span>
                         </div>
-                        <h3>Product Display Page Iteration</h3>
-                        <p>Redesign and testing of a new product display page versus the original to measure engagement and conversion improvements.</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Conversion</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Product Engagement</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Get to Product Rate</span>
-                        </div>
-                        <a href="https://docs.google.com/presentation/d/1qVTUkd5CZjdGqsO874gP2xD7QCVHC0n-GqNVf0FhC5M/present?slide=id.p" target="_blank" class="case-study-link">View Presentation →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Workshop</span>
-                            <span class="case-study-tag">Education</span>
+                </a>
+ 
+                <a href="https://docs.google.com/presentation/d/1n2yXSDjp5aW495MOsTkSmLcRuaLXQ3GHEXHJXxW56Uc/present?slide=id.p" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Workshop</span>
+                                <span class="case-study-tag">Education</span>
+                            </div>
+                            <h3>General Assembly Workshop/Conference</h3>
+                            <p>Remote conference exploring UX research methods in more detail, sharing best practices and advanced techniques.</p>
+                            <span class="case-study-link">View Presentation →</span>
                         </div>
-                        <h3>General Assembly Workshop/Conference</h3>
-                        <p>Remote conference exploring UX research methods in more detail, sharing best practices and advanced techniques.</p>
-                        <a href="https://docs.google.com/presentation/d/1n2yXSDjp5aW495MOsTkSmLcRuaLXQ3GHEXHJXxW56Uc/present?slide=id.p" target="_blank" class="case-study-link">View Presentation →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Media</span>
-                            <span class="case-study-tag">Netflix</span>
+                </a>
+ 
+                <a href="https://docs.google.com/presentation/d/1NbNLU0IuoWjVQdxTUhgpQv1-zXmywn0DuISK4J0DxhY/present?slide=id.p" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Media</span>
+                                <span class="case-study-tag">Netflix</span>
+                            </div>
+                            <h3>Netflix User Journey</h3>
+                            <p>Understanding the user journey for users on the Netflix streaming platform, mapping touchpoints and identifying optimization opportunities.</p>
+                            <span class="case-study-link">View Presentation →</span>
                         </div>
-                        <h3>Netflix User Journey</h3>
-                        <p>Understanding the user journey for users on the Netflix streaming platform, mapping touchpoints and identifying optimization opportunities.</p>
-                        <a href="https://docs.google.com/presentation/d/1NbNLU0IuoWjVQdxTUhgpQv1-zXmywn0DuISK4J0DxhY/present?slide=id.p" target="_blank" class="case-study-link">View Presentation →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Retail</span>
-                            <span class="case-study-tag">Samsung</span>
+                </a>
+ 
+                <a href="https://drive.google.com/file/d/1SwntHMpmxkQig3AohrpPf5RkCizexd4d/view" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1593784991095-a205069470b6?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Retail</span>
+                                <span class="case-study-tag">Samsung</span>
+                            </div>
+                            <h3>Samsung TVs User Journey</h3>
+                            <p>Research to help understand how people buy Samsung TVs to enhance the digital experience and purchasing journey.</p>
+                            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Conversion</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ AOV</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Revenue</span>
+                                <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Market Share</span>
+                            </div>
+                            <span class="case-study-link">View Document →</span>
                         </div>
-                        <h3>Samsung TVs User Journey</h3>
-                        <p>Research to help understand how people buy Samsung TVs to enhance the digital experience and purchasing journey.</p>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; font-size: 0.85rem;">
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Conversion</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ AOV</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Revenue</span>
-                            <span style="background: rgba(212, 98, 47, 0.1); padding: 0.25rem 0.75rem; border-radius: 3px; color: var(--accent);">↑ Market Share</span>
-                        </div>
-                        <a href="https://drive.google.com/file/d/1SwntHMpmxkQig3AohrpPf5RkCizexd4d/view" target="_blank" class="case-study-link">View Document →</a>
                     </div>
-                </div>
-
-                <div class="case-study-card fade-in">
-                    <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop') center/cover;"></div>
-                    <div class="case-study-content">
-                        <div class="case-study-meta">
-                            <span class="case-study-tag">Retail</span>
-                            <span class="case-study-tag">Course Project</span>
+                </a>
+ 
+                <a href="https://docs.google.com/presentation/d/1PjRBloG5UXJ737Vx4oD0lq43ekqTk5102hchy3glIEI/present?slide=id.p" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="case-study-card fade-in">
+                        <div class="case-study-image" style="background: url('https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop') center/cover;"></div>
+                        <div class="case-study-content">
+                            <div class="case-study-meta">
+                                <span class="case-study-tag">Retail</span>
+                                <span class="case-study-tag">Course Project</span>
+                            </div>
+                            <h3>Tomorrow Shopping Cart</h3>
+                            <p>Case study created when enrolled in 'The Ultimate Guide to Usability' course, demonstrating foundational usability principles.</p>
+                            <span class="case-study-link">View Presentation →</span>
                         </div>
-                        <h3>Tomorrow Shopping Cart</h3>
-                        <p>Case study created when enrolled in 'The Ultimate Guide to Usability' course, demonstrating foundational usability principles.</p>
-                        <a href="https://docs.google.com/presentation/d/1PjRBloG5UXJ737Vx4oD0lq43ekqTk5102hchy3glIEI/present?slide=id.p" target="_blank" class="case-study-link">View Presentation →</a>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
-
+ 
     <section id="recommendations">
         <div class="section-header fade-in">
             <div class="section-label">Testimonials</div>
@@ -519,7 +547,7 @@
             </div>
         </div>
     </section>
-
+ 
     <section id="accreditations">
         <div class="section-header fade-in">
             <div class="section-label">Credentials</div>
@@ -566,8 +594,8 @@
             </div>
         </div>
     </section>
-
-
+ 
+ 
     <section id="resources">
         <div class="section-header fade-in">
             <div class="section-label">Knowledge Hub</div>
@@ -603,7 +631,7 @@
 </div>
         </div>
     </section>
-
+ 
     <section id="templates">
         <div class="section-header fade-in">
             <div class="section-label">Research Tools</div>
@@ -633,7 +661,7 @@
             </div>
         </div>
     </section>
-
+ 
     <footer>
         <div class="footer-content">
             <div class="footer-about">
@@ -684,7 +712,7 @@
             <p>&copy; 2026 Aaron Christopher. All rights reserved.</p>
         </div>
     </footer>
-
+ 
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -695,12 +723,12 @@
                 }
             });
         });
-
+ 
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
-
+ 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -708,7 +736,7 @@
                 }
             });
         }, observerOptions);
-
+ 
         document.querySelectorAll('.fade-in').forEach(element => {
             observer.observe(element);
         });
